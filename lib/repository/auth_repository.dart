@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:g_docs_clone_flutter/constants.dart';
+import 'package:g_docs_clone_flutter/models/error_model.dart';
 import 'package:g_docs_clone_flutter/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
@@ -22,7 +23,11 @@ class AuthRepository {
       : _googleSignIn = googleSignIn,
         _client = client;
 
-  void signInWithGoogle() async {
+  Future<ErrorModel> signInWithGoogle() async {
+    ErrorModel error = ErrorModel(
+      error: 'Something went wrong',
+      data: null,
+    );
     try {
       final user = await _googleSignIn.signIn();
       if (user != null) {
@@ -45,11 +50,13 @@ class AuthRepository {
             final newUser = userAcc.copyWith(
               uid: jsonDecode(res.body)['user']['_id'],
             );
+            error = ErrorModel(error: null, data: newUser);
             break;
         }
       }
     } catch (e) {
-      print(e);
+      error = ErrorModel(error: e.toString(), data: null);
     }
+    return error;
   }
 }
