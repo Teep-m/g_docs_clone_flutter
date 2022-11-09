@@ -17,9 +17,7 @@ class AuthRepository {
     try {
       final user = await _googleSignIn.signIn();
       if (user != null) {
-        print(user.email);
-        print(user.displayName);
-        print(user.photoUrl);
+        final user = UserModel(email: email, name: name, profilePic: profilePic, uid: uid, token: token,)
       }
     } catch (e) {
       print(e);
