@@ -39,4 +39,20 @@ class UserModel {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  UserModel copyWith({
+    String? email,
+    String? name,
+    String? profilePic,
+    String? uid,
+    String? token,
+  }) {
+    return UserModel(
+      email: email ?? this.email,
+      name: name ?? this.name,
+      profilePic: profilePic ?? this.profilePic,
+      uid: uid ?? this.uid,
+      token: token ?? this.token,
+    );
+  }
 }
