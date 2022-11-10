@@ -1,16 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const authRouter = require("./routes/auth");
 
 const PORT = process.env.PORT | 3001;
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(authRouter);
 
-const DB = "mongodb+srv://tetsu:13silvia@cluster0.1x5pyca.mongodb.net/?retryWrites=true&w=majority";
-
+const DB =
+  "mongodb+srv://tetsu:13silvia@cluster0.1x5pyca.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
   .connect(DB)
