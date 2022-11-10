@@ -88,16 +88,17 @@ class AuthRepository {
               jsonEncode(
                 jsonDecode(res.body)['user'],
               ),
-            ).copyWith(
-              token: token, 
-            );
+            ).copyWith(token: token);
             error = ErrorModel(error: null, data: newUser);
             _localStorageRepo.setToken(newUser.token);
             break;
         }
       }
     } catch (e) {
-      error = ErrorModel(error: e.toString(), data: null);
+      error = ErrorModel(
+        error: e.toString(),
+        data: null,
+      );
     }
     return error;
   }
