@@ -17,14 +17,14 @@ class HomeScreen extends ConsumerWidget {
             onPressed: () {},
             icon: const Icon(
               Icons.add,
-              color: kBlackColor,
+              color: kCyanColor,
             ),
           ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.logout,
-              color: kBlackColor,
+              color: kRedColor,
             ),
           ),
         ],
