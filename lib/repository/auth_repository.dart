@@ -104,6 +104,7 @@ class AuthRepository {
   }
 
   void signOut() async {
+    await _googleSignIn.signOut();
     _localStorageRepo.setToken('');
   }
 }

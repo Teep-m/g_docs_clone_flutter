@@ -6,6 +6,11 @@ import 'package:g_docs_clone_flutter/repository/auth_repository.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  void signOut(WidgetRef ref) {
+    ref.read(authRepositoryProvider).signOut();
+    ref.read(userProvider.notifier).update((state) => null);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -21,7 +26,7 @@ class HomeScreen extends ConsumerWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () => signOut(ref),
             icon: const Icon(
               Icons.logout,
               color: kRedColor,
