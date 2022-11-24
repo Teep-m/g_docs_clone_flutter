@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:g_docs_clone_flutter/constants.dart';
@@ -45,7 +46,46 @@ class DocumentRepository {
         default:
           error = ErrorModel(
             error: res.body,
-            data:null,
+            data: null,
+          );
+      }
+    } catch (e) {
+      error = ErrorModel(
+        error: e.toString(),
+        data: null,
+      );
+    }
+    return error;
+  }
+
+  Future<ErrorModel> getDocuments(String token) async {
+    ErrorModel error = ErrorModel(
+      error: 'Something went wrong',
+      data: null,
+    );
+    try {
+      var res = await _client.get(
+        Uri.parse('$host/doc/me'),
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'x-auth-token': token,
+        },
+      );
+      switch (res.statusCode) {
+        case 200:
+          List<DocumentModel> documents = [];
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            documents.add(DocumentModel.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+          }
+          error = ErrorModel(
+            error: null,
+            data: documents,
+          );
+          break;
+        default:
+          error = ErrorModel(
+            error: res.body,
+            data: null,
           );
       }
     } catch (e) {

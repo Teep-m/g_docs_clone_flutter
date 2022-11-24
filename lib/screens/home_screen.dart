@@ -21,7 +21,7 @@ class HomeScreen extends ConsumerWidget {
     final snackbar = ScaffoldMessenger.of(context);
 
     final errorModel =
-        await ref.read(DocumentRepositoryProvider).createDocument(token);
+        await ref.read(documentRepositoryProvider).createDocument(token);
 
     if (errorModel.data != null) {
       navigator.push('/document/${errorModel.data.id}');
@@ -57,10 +57,13 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Text(
-          ref.watch(userProvider)!.uid,
-        ),
+      body: FutureBuilder(
+        future: ref.watch(documentRepositoryProvider).getDocuments(
+              ref.watch(userProvider)!.token,
+            ),
+        builder: ((context, snapshot) {
+              
+            }),
       ),
     );
   }
