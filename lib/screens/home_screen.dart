@@ -76,14 +76,17 @@ class HomeScreen extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   DocumentModel document = snapshot.data!.data[index];
 
-                  return SizedBox(
-                    height: 50,
-                    child: Card(
-                      child: Center(
-                        child: Text(
-                          document.title,
-                          style: const TextStyle(
-                            fontSize: 17,
+                  return InkWell(
+                    onTap: () {},
+                    child: SizedBox(
+                      height: 50,
+                      child: Card(
+                        child: Center(
+                          child: Text(
+                            document.title,
+                            style: const TextStyle(
+                              fontSize: 17,
+                            ),
                           ),
                         ),
                       ),
