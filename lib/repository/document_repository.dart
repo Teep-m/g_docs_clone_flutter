@@ -42,6 +42,11 @@ class DocumentRepository {
             data: DocumentModel.fromJson(res.body),
           );
           break;
+        default:
+          error = ErrorModel(
+            error: res.body,
+            data:null,
+          );
       }
     } catch (e) {
       error = ErrorModel(
