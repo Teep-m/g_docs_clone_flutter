@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'dart:html';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:g_docs_clone_flutter/constants.dart';
@@ -8,7 +6,7 @@ import 'package:g_docs_clone_flutter/models/document_model.dart';
 import 'package:g_docs_clone_flutter/models/error_model.dart';
 import 'package:http/http.dart';
 
-final DocumentRepositoryProvider = Provider(
+final documentRepositoryProvider = Provider(
   (ref) => DocumentRepository(
     client: Client(),
   ),
@@ -75,7 +73,8 @@ class DocumentRepository {
         case 200:
           List<DocumentModel> documents = [];
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
-            documents.add(DocumentModel.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+            documents.add(
+                DocumentModel.fromJson(jsonEncode(jsonDecode(res.body)[i])));
           }
           error = ErrorModel(
             error: null,
