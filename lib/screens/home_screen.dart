@@ -67,22 +67,28 @@ class HomeScreen extends ConsumerWidget {
             return const Loader();
           }
 
-          return ListView.builder(
-            itemCount: snapshot.data!.data.length,
-            itemBuilder: (context, index) {
-              DocumentModel document = snapshot.data!.data[index];
-
-              return Card(
-                child: Center(
-                  child: Text(
-                    document.title,
-                    style: const TextStyle(
-                      fontSize: 17,
+          return SizedBox(
+            width: 600,
+            child: ListView.builder(
+              itemCount: snapshot.data!.data.length,
+              itemBuilder: (context, index) {
+                DocumentModel document = snapshot.data!.data[index];
+          
+                return SizedBox(
+                  height: 50,
+                  child: Card(
+                    child: Center(
+                      child: Text(
+                        document.title,
+                        style: const TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         },
       ),
